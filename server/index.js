@@ -4,12 +4,15 @@ import {dbConnect} from "./utils/index.js"
 import mongoose  from "mongoose"
 import bodyParser from "body-parser"
 import UserRoutes from "./routes/user.routes.js"
+import AuthRoutes from "./routes/auth.routes.js"
+import cors from "cors"
 dotenv.config()
 
 const app = express()
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cors())
 
 const PORT = process.env.PORT
 
@@ -25,3 +28,4 @@ dbConnect()
 })
 
 app.use('/user',UserRoutes)
+app.use('/auth',AuthRoutes)

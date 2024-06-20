@@ -2,10 +2,13 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 
 
 export default function Header() {
+
+  const {user} = useSelector(state => state.user)
 
   return (
   <div>
@@ -20,7 +23,7 @@ export default function Header() {
           </ul>
         </div>
         <div className="signin">
-          <Link to='/signin'><button className='bg-blue-500 text-white h-[30px] rounded-lg w-[80px]'>Sign In</button></Link>
+          <Link to='/signin'><button className='bg-blue-500 text-white h-[30px] rounded-lg w-[80px]' hidden={!(user === null)}>Sign In</button></Link>
         </div>
         
    </div>

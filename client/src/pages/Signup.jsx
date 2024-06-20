@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import axios from "axios";
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Signup = () => {
+  const navigate = useNavigate()
+
   const [formData, setFormdata] = useState({
     username: '',
     email: '',
@@ -38,6 +43,15 @@ const Signup = () => {
     e.preventDefault();
     console.log('Form submitted:', formData);
     // Add form submission logic here, e.g., sending data to a server
+    axios.post('http://localhost:3000/user/signup',formData)
+    .then(function (response) {
+        console.log(response);
+        navigate('/signin')
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
+    console.log("user created via frontend")
   };
 
   return (
@@ -79,6 +93,7 @@ const Signup = () => {
           <button type="submit" className='mt-4 bg-blue-500 text-white rounded-lg h-[40px] w-[300px]'>
             Sign Up
           </button>
+        <Link to='/signin'>Already have account? SigIn</Link>
         </form>
       </div>
     </div>
